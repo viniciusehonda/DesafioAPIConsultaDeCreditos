@@ -18,6 +18,8 @@ builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
 
 WebApplication app = builder.Build();
 
+app.MapEndpoints();
+
 app.ApplyMigrations();
 
 // Configure the HTTP request pipeline.
