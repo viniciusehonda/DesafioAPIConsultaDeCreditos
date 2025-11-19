@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
 		<ProjectReference Include="..\ConsultaCreditoService.Domain\ConsultaCreditoService.Domain.csproj" />
+		<ProjectReference Include="..\ConsultaCreditoService.Infrastructure\ConsultaCreditoService.Infrastructure.csproj" />
+		<ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
 	</ItemGroup>
 
 </Project>

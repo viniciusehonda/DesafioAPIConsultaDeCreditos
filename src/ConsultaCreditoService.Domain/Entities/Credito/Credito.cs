@@ -21,8 +21,7 @@ public class Credito
 
     private Credito() { }
 
-    public Credito(long id,
-        string numeroCredito,
+    public Credito(string numeroCredito,
         string numeroNfse,
         DateTime dataConstituicao,
         decimal valorIssqn,
@@ -33,7 +32,6 @@ public class Credito
         decimal valorDeducao,
         decimal baseCalculo)
     {
-        Id = id;
         NumeroCredito = numeroCredito;
         NumeroNfse = numeroNfse;
         DataConstituicao = dataConstituicao;
@@ -46,8 +44,7 @@ public class Credito
         BaseCalculo = baseCalculo;
     }
 
-    public static Credito Create(long id,
-        string numeroCredito,
+    public static Credito Create(string numeroCredito,
         string numeroNfse,
         DateTime dataConstituicao,
         decimal valorIssqn,
@@ -58,8 +55,7 @@ public class Credito
         decimal valorDeducao,
         decimal baseCalculo)
     {
-        return new Credito(id,
-            numeroCredito,
+        return new Credito(numeroCredito,
             numeroNfse,
             dataConstituicao,
             valorIssqn,
