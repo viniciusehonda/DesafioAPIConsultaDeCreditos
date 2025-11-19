@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ConsultaCreditoService
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+  azurite-servicebus:
+    image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
+    container_name: azurite-servicebus
+    ports:
+      - "5672:5672"
+      - "9500:9500"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    restart: unless-stopped
+volumes:
+  postgres-data:
