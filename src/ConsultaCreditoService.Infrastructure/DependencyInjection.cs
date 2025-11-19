@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ConsultaCreditoService.Domain.Repository;
 using ConsultaCreditoService.Infrastructure.Database;
+using ConsultaCreditoService.Infrastructure.Messaging;
+using ConsultaCreditoService.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -16,10 +19,18 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration) =>
          services.AddServices()
+            .AddRepositories()
             .AddDatabase(configuration);
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
+        services.AddSingleton<AzureServiceBusPublisher>();
+        return services;
+    }
+
+    private static IServiceCollection AddRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<ICreditoRepository, CreditoRepository>();
         return services;
     }
 
