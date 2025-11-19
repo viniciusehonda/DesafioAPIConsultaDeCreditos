@@ -11,9 +11,9 @@ using SharedKernel;
 
 namespace ConsultaCreditoService.Application.Credito.IntegrarCreditoConstituido;
 internal sealed class IntegrarCreditoConstituidoCommandHandler(AzureServiceBusPublisher serviceBusPublisher)
-    : ICommandHandler<IntegrarCreditoConstituidoCommand, bool>
+    : ICommandHandler<IntegrarCreditoConstituidoCommand>
 {
-    public async Task<Result<bool>> Handle(IntegrarCreditoConstituidoCommand command, CancellationToken cancellationToken)
+    public async Task<Result> Handle(IntegrarCreditoConstituidoCommand command, CancellationToken cancellationToken)
     {
         var credito = Domain.Entities.Credito.Create(
             command.NumeroCredito,
@@ -30,6 +30,6 @@ internal sealed class IntegrarCreditoConstituidoCommandHandler(AzureServiceBusPu
 
         await serviceBusPublisher.PublishAsync(Domain.Entities.CreditoMessageTopics.IntegrarCreditoConstituidoEntry, credito);
 
-        return true;
+        return Result.Success();
     }
 }

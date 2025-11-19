@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
+	  <PackageReference Include="Scrutor" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\ConsultaCreditoService.Domain\ConsultaCreditoService.Domain.csproj" />
 		<ProjectReference Include="..\ConsultaCreditoService.Infrastructure\ConsultaCreditoService.Infrastructure.csproj" />
 		<ProjectReference Include="..\SharedKernel\SharedKernel.csproj" />
