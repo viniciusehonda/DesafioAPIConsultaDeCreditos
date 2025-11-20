@@ -2,6 +2,8 @@ using System.Reflection;
 using ConsultaCreditoService.Api.Extensions;
 using ConsultaCreditoService.Application;
 using ConsultaCreditoService.Infrastructure;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +31,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+app.MapHealthChecks("/self", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("self")
+});
+
+app.MapHealthChecks("/ready", new HealthCheckOptions
+{
+    Predicate = check => check.Tags.Contains("ready")
+});
+
+//app.UseHttpsRedirection();
 
 await app.RunAsync();

@@ -11,7 +11,7 @@ internal sealed class IntegrarCreditoConstituido : IEndpoint
 {
     public sealed record Request(string NumeroCredito,
         string NumeroNfse,
-        DateTime DataConstituicao,
+        string DataConstituicao,
         decimal ValorIssqn,
         string TipoCredito,
         string SimplesNacional,

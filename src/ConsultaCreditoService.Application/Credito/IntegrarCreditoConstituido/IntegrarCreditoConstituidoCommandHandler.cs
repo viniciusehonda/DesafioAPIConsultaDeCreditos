@@ -15,7 +15,7 @@ internal sealed class IntegrarCreditoConstituidoCommandHandler(AzureServiceBusPu
 {
     public async Task<Result> Handle(IntegrarCreditoConstituidoCommand command, CancellationToken cancellationToken)
     {
-        IEnumerable<Domain.Entities.Credito> creditos = command.items
+        IEnumerable<Domain.Entities.Credito> creditos = command.Items
             .Select(c => Domain.Entities.Credito.Create(
                 c.NumeroCredito,
                 c.NumeroNfse,

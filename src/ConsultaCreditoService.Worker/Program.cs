@@ -6,7 +6,7 @@ HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 builder.Services
     .AddApplication()
-    .AddInfrastructure(builder.Configuration);
+    .AddWorkerInfrastructure(builder.Configuration);
 
 builder.Services.AddHostedService<Worker>();
 
