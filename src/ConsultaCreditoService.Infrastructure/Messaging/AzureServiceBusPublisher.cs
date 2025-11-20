@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure.Messaging.ServiceBus;
+using Azure.Messaging.ServiceBus.Administration;
 using Microsoft.Extensions.Configuration;
 
 namespace ConsultaCreditoService.Infrastructure.Messaging;
@@ -27,6 +28,8 @@ public class AzureServiceBusPublisher : IDisposable
         };
 
         await sender.SendMessageAsync(message);
+
+        await sender.DisposeAsync();
     }
 
     public async void Dispose()
