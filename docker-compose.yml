@@ -12,8 +12,8 @@ services:
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 3s
-      timeout: 3s
+      interval: 10s
+      timeout: 15s
       retries: 10
   servicebus:
     container_name: "servicebus"
@@ -25,7 +25,7 @@ services:
       - "5671:5671"
       - "5672:5672"
       - "5300:5300"
-      - "8080:8080"
+    restart: always
     environment:
       SQL_SERVER: mssql
       MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD}"
@@ -55,25 +55,32 @@ services:
       - "5025:8080"
     networks:
       - sb-emulator
+    restart: always
     depends_on:
       postgres:
-        condition: service_healthy 
+        condition: service_healthy
+      servicebus:
+        condition: service_started
     environment:
       ConnectionStrings__Database: "${DB_CONNECTION_STRING}"
       AzureServiceBus__ConnectionString: "${SERVICE_BUS_CONNECTION_STRING}"
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/ready"]
-      interval: 5s
-      retries: 10
+      test: ["CMD", "curl", "-f", "http://localhost:5025/ready"]
+      interval: 10s
+      timeout: 15s
+      retries: 5
   worker:
     build:
       context: ./
       dockerfile: ./src/ConsultaCreditoService.Worker/Dockerfile
     networks:
       - sb-emulator
+    restart: always
     depends_on:
-      - servicebus
-      - api
+      postgres:
+        condition: service_healthy
+      servicebus:
+        condition: service_started
     environment:
       ConnectionStrings__Database: "${DB_CONNECTION_STRING}"
       AzureServiceBus__ConnectionString: "${SERVICE_BUS_CONNECTION_STRING}"
