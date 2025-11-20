@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Messaging.ServiceBus" />
     <PackageReference Include="Microsoft.Extensions.Hosting" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConsultaCreditoService.Application\ConsultaCreditoService.Application.csproj" />
+    <ProjectReference Include="..\ConsultaCreditoService.Infrastructure\ConsultaCreditoService.Infrastructure.csproj" />
   </ItemGroup>
 </Project>
