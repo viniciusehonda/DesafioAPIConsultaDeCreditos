@@ -2,9 +2,9 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: ConsultaCreditoService
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DBNAME}
     ports:
       - "5432:5432"
     restart: always
@@ -38,6 +38,25 @@ services:
         environment:
           ACCEPT_EULA: ${ACCEPT_EULA}
           MSSQL_SA_PASSWORD: "${MSSQL_SA_PASSWORD}" # To be filled by user as per policy : https://learn.microsoft.com/en-us/sql/relational-databases/security/strong-passwords?view=sql-server-linux-ver16 
-
+  api:
+    build:
+      context: ./
+      dockerfile: ./src/ConsultaCreditoService.Api/Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - emulator
+      - postgres
+    environment:
+      ConnectionStrings__Database: "${DB_CONNECTION_STRING}"
+      AzureServiceBus__ConnectionString: "${SERVICE_BUS_CONNECTION_STRING}"
+  worker:
+    build:
+      context: ./
+      dockerfile: ./src/ConsultaCreditoService.Worker/Dockerfile
+    depends_on:
+      - api
+    environment:
+      AzureServiceBus__ConnectionString: "${SERVICE_BUS_CONNECTION_STRING}"
 networks:
   sb-emulator:
