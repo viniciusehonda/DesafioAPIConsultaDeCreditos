@@ -8,6 +8,11 @@ services:
     ports:
       - "5432:5432"
     restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
   emulator:
     container_name: "servicebus-emulator"
     image: mcr.microsoft.com/azure-messaging/servicebus-emulator:latest
@@ -45,8 +50,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - emulator
-      - postgres
+      postgres:
+        condition: service_healthy 
     environment:
       ConnectionStrings__Database: "${DB_CONNECTION_STRING}"
       AzureServiceBus__ConnectionString: "${SERVICE_BUS_CONNECTION_STRING}"
@@ -55,7 +60,7 @@ services:
       context: ./
       dockerfile: ./src/ConsultaCreditoService.Worker/Dockerfile
     depends_on:
-      - api
+      - emulator
     environment:
       AzureServiceBus__ConnectionString: "${SERVICE_BUS_CONNECTION_STRING}"
 networks:
