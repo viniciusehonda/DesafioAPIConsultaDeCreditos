@@ -17,7 +17,7 @@ internal sealed class ConsultarCreditoPorNfseQueryHandler(ConsultaCreditoService
     {
         return await dbContext.Set<Domain.Entities.Credito>()
             .AsNoTracking()
-            .Where(s => s.NumeroNfse.Equals(query.NumeroNfse, StringComparison.Ordinal))
+            .Where(s => s.NumeroNfse == query.NumeroNfse)
             .Select(s => new ConsultarCreditoPorNfseResponse(
                 s.NumeroCredito,
                 s.NumeroNfse,
