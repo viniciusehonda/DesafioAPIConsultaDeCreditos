@@ -41,3 +41,11 @@ Content-Type: application/json
   }
 ]
 ###
+
+GET {{ConsultaCreditoService.Api_HostAddress}}/api/creditos/7891011
+
+###
+
+GET {{ConsultaCreditoService.Api_HostAddress}}/api/creditos/credito/123456
+
+###
