@@ -24,7 +24,7 @@ internal sealed class IntegrarCreditoConstituido : IEndpoint
     {
         app.MapPost("api/creditos/integrar-credito-constituido", async (
             List<Request> requestItems,
-            ICommandHandler<IntegrarCreditoConstituidoCommand> handler,
+            ICommandHandler<IntegrarCreditoConstituidoCommand, IntegrarCreditoConstituidoResponse> handler,
             CancellationToken cancellationToken) =>
         {
             var command = new IntegrarCreditoConstituidoCommand([.. requestItems
@@ -42,9 +42,9 @@ internal sealed class IntegrarCreditoConstituido : IEndpoint
                         r.BaseCalculo)
             )]);
 
-            Result result = await handler.Handle(command, cancellationToken);
+            Result<IntegrarCreditoConstituidoResponse> result = await handler.Handle(command, cancellationToken);
 
-            return result.Match(() => Results.Ok(), CustomResults.Problem);
+            return result.Match(Results.Ok, CustomResults.Problem);
         })
         .WithTags("Creditos");
     }
