@@ -15,20 +15,21 @@ internal sealed class IntegrarCreditoConstituidoCommandHandler(AzureServiceBusPu
 {
     public async Task<Result> Handle(IntegrarCreditoConstituidoCommand command, CancellationToken cancellationToken)
     {
-        var credito = Domain.Entities.Credito.Create(
-            command.NumeroCredito,
-            command.NumeroNfse,
-            command.DataConstituicao,
-            command.ValorIssqn,
-            command.TipoCredito,
-            command.SimplesNacional,
-            command.Aliquota,
-            command.ValorFaturado,
-            command.ValorDeducao,
-            command.BaseCalculo
-            );
+        IEnumerable<Domain.Entities.Credito> creditos = command.items
+            .Select(c => Domain.Entities.Credito.Create(
+                c.NumeroCredito,
+                c.NumeroNfse,
+                c.DataConstituicao,
+                c.ValorIssqn,
+                c.TipoCredito,
+                c.SimplesNacional,
+                c.Aliquota,
+                c.ValorFaturado,
+                c.ValorDeducao,
+                c.BaseCalculo
+            ));
 
-        await serviceBusPublisher.PublishAsync(Domain.Entities.CreditoMessageTopics.IntegrarCreditoConstituidoEntry, credito);
+        await serviceBusPublisher.PublishAsync(Domain.Entities.CreditoMessageTopics.IntegrarCreditoConstituidoEntry, creditos);
 
         return Result.Success();
     }

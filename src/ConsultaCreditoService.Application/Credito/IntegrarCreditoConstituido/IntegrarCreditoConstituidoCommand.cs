@@ -8,13 +8,15 @@ using ConsultaCreditoService.Application.Abstractions.Messaging;
 using ICommand = ConsultaCreditoService.Application.Abstractions.Messaging.ICommand;
 
 namespace ConsultaCreditoService.Application.Credito.IntegrarCreditoConstituido;
-public sealed record IntegrarCreditoConstituidoCommand(string NumeroCredito,
+public sealed record IntegrarCreditoConstituidoCommand(List<IntegrarCreditoConstituidoDto> items) : ICommand;
+
+public sealed record IntegrarCreditoConstituidoDto(string NumeroCredito,
         string NumeroNfse,
         DateTime DataConstituicao,
         decimal ValorIssqn,
         string TipoCredito,
-        bool SimplesNacional,
+        string SimplesNacional,
         decimal Aliquota,
         decimal ValorFaturado,
         decimal ValorDeducao,
-        decimal BaseCalculo) : ICommand;
+        decimal BaseCalculo);

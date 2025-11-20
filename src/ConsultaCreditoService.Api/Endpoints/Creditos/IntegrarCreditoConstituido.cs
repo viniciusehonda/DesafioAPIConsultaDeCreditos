@@ -14,7 +14,7 @@ internal sealed class IntegrarCreditoConstituido : IEndpoint
         DateTime DataConstituicao,
         decimal ValorIssqn,
         string TipoCredito,
-        bool SimplesNacional,
+        string SimplesNacional,
         decimal Aliquota,
         decimal ValorFaturado,
         decimal ValorDeducao,
@@ -23,21 +23,24 @@ internal sealed class IntegrarCreditoConstituido : IEndpoint
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
         app.MapPost("api/creditos/integrar-credito-constituido", async (
-            Request request,
+            List<Request> requestItems,
             ICommandHandler<IntegrarCreditoConstituidoCommand> handler,
             CancellationToken cancellationToken) =>
         {
-            var command = new IntegrarCreditoConstituidoCommand(
-                request.NumeroCredito,
-                request.NumeroNfse,
-                request.DataConstituicao,
-                request.ValorIssqn,
-                request.TipoCredito,
-                request.SimplesNacional,
-                request.Aliquota,
-                request.ValorFaturado,
-                request.ValorDeducao,
-                request.BaseCalculo);
+            var command = new IntegrarCreditoConstituidoCommand([.. requestItems
+                .Select(r =>
+                    new IntegrarCreditoConstituidoDto(
+                        r.NumeroCredito,
+                        r.NumeroNfse,
+                        r.DataConstituicao,
+                        r.ValorIssqn,
+                        r.TipoCredito,
+                        r.SimplesNacional,
+                        r.Aliquota,
+                        r.ValorFaturado,
+                        r.ValorDeducao,
+                        r.BaseCalculo)
+            )]);
 
             Result result = await handler.Handle(command, cancellationToken);
 
