@@ -11,9 +11,14 @@ using Microsoft.EntityFrameworkCore;
 namespace ConsultaCreditoService.Infrastructure.Repositories;
 public class CreditoRepository(ConsultaCreditoServiceDbContext consultaCreditoServiceDbContext) : ICreditoRepository
 {
-    public async Task AddCredito(Credito credito, CancellationToken ct = default)
+    public async Task AddCreditos(List<Credito> creditos, CancellationToken ct = default)
     {
-        await consultaCreditoServiceDbContext.AddAsync(credito, ct);
+        foreach(Credito credito in creditos)
+        {
+            await consultaCreditoServiceDbContext.AddAsync(credito, ct);
+        }
+
+        await consultaCreditoServiceDbContext.SaveChangesAsync(ct);
     }
 
     public async Task<List<Credito>> GetCreditosByNfse(string nfse, CancellationToken ct = default)

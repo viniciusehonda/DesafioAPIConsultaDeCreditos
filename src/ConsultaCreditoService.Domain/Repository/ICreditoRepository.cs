@@ -8,7 +8,7 @@ using ConsultaCreditoService.Domain.Entities;
 namespace ConsultaCreditoService.Domain.Repository;
 public interface ICreditoRepository
 {
-    Task AddCredito(Credito credito, CancellationToken ct = default);
+    Task AddCreditos(List<Credito> creditos, CancellationToken ct = default);
     Task<List<Credito>> GetCreditosByNfse(string nfse, CancellationToken ct = default);
     Task<List<Credito>> GetCreditosByNumeroCredito(string numeroCredito, CancellationToken ct = default); 
 }
