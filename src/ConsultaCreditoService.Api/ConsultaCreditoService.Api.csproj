@@ -1,4 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+	  <UserSecretsId>ed1092bf-cb54-404e-ac0e-9fd92886a445</UserSecretsId>
+	  <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	  <DockerfileContext>..\..</DockerfileContext>
+	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ConsultaCreditoService.Application\ConsultaCreditoService.Application.csproj" />
 		<ProjectReference Include="..\ConsultaCreditoService.Infrastructure\ConsultaCreditoService.Infrastructure.csproj" />
@@ -8,6 +13,7 @@
 	    <PrivateAssets>all</PrivateAssets>
 	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	  </PackageReference>
+	  <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" />
 	  <PackageReference Include="Swashbuckle.AspNetCore" />
 	</ItemGroup>
 
