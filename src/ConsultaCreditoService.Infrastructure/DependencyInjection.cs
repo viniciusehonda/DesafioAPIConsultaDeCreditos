@@ -64,9 +64,9 @@ public static class DependencyInjection
             .AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy(), tags: ["self"])
             .AddNpgSql(configuration.GetConnectionString("Database")!, tags: ["ready"])
-            .AddAzureServiceBusTopic(
+            .AddAzureServiceBusQueue(
                 connectionString: configuration["AzureServiceBus:ConnectionString"] ?? "",
-                topicName: CreditoMessageTopics.IntegrarCreditoConstituidoEntry,
+                queueName: "queue.1",
                 tags: ["ready"]
             );
 
