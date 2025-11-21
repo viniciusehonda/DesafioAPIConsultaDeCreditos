@@ -64,8 +64,7 @@ public class Credito
         NumeroNfse = numeroNfse;
         DataConstituicao = DateTime.SpecifyKind(DateTime.ParseExact(dataConstituicao,
             "yyyy-MM-dd",
-            CultureInfo.InvariantCulture,
-            DateTimeStyles.AssumeUniversal), DateTimeKind.Utc);
+            CultureInfo.InvariantCulture), DateTimeKind.Utc);
         ValorIssqn = valorIssqn;
         TipoCredito = tipoCredito;
         IsSimplesNacional = isSimplesNacional;
