@@ -8,4 +8,5 @@ namespace ConsultaCreditoService.Infrastructure.Messaging;
 public interface IAzureServiceBusPublisher
 {
     Task PublishAsync<T>(string topic, T data);
+    Task PublishAsync(string topic, string jsonData);
 }

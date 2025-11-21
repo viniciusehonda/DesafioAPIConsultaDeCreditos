@@ -9,4 +9,6 @@ namespace ConsultaCreditoService.Domain.Repository;
 public interface IOutboxMessageRepository
 {
     Task PublishMessage(OutboxMessage message, CancellationToken cancellationToken = default);
+    Task<OutboxMessage> GetNextMessage(CancellationToken cancellationToken = default);
+    Task MarkOutboxMessageAsPublished(Guid id, CancellationToken cancellationToken = default);
 }

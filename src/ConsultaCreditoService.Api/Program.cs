@@ -1,5 +1,6 @@
 using System.Reflection;
 using ConsultaCreditoService.Api.Extensions;
+using ConsultaCreditoService.Api.Workers;
 using ConsultaCreditoService.Application;
 using ConsultaCreditoService.Infrastructure;
 using HealthChecks.UI.Client;
@@ -17,6 +18,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddEndpoints(Assembly.GetExecutingAssembly());
+
+builder.Services.AddHostedService<OutboxWorker>();
 
 WebApplication app = builder.Build();
 
