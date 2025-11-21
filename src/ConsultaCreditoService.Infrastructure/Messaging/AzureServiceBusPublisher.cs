@@ -32,6 +32,20 @@ public class AzureServiceBusPublisher : IAzureServiceBusPublisher, IDisposable
         await sender.DisposeAsync();
     }
 
+    public async Task PublishAsync(string topic, string jsonData)
+    {
+        ServiceBusSender sender = _serviceBusClient.CreateSender(topic);
+
+        var message = new ServiceBusMessage(jsonData)
+        {
+            ContentType = "application/json"
+        };
+
+        await sender.SendMessageAsync(message);
+
+        await sender.DisposeAsync();
+    }
+
     public async void Dispose()
     {
         await _serviceBusClient.DisposeAsync();

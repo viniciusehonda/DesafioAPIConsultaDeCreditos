@@ -22,7 +22,7 @@ public class Worker : BackgroundService
     {
         _logger = logger;
         _scopeFactory = scopeFactory;
-        _interval = TimeSpan.FromMicroseconds(500);
+        _interval = TimeSpan.FromMilliseconds(500);
         _client = new ServiceBusClient(configuration["AzureServiceBus:ConnectionString"]);
 
         string topic = CreditoMessageTopics.IntegrarCreditoConstituidoEntry;

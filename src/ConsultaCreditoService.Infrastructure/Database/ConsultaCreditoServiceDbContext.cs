@@ -11,6 +11,7 @@ public sealed class ConsultaCreditoServiceDbContext(DbContextOptions<ConsultaCre
     : DbContext(options)
 {
     public DbSet<Credito> Creditos { get; set; }
+    public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

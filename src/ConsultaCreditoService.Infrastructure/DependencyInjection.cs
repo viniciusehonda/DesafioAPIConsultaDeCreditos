@@ -41,6 +41,7 @@ public static class DependencyInjection
     private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         services.AddScoped<ICreditoRepository, CreditoRepository>();
+        services.AddScoped<IOutboxMessageRepository, OutboxMessageRepository>();
         return services;
     }
 
