@@ -20,22 +20,4 @@ public class CreditoRepository(ConsultaCreditoServiceDbContext consultaCreditoSe
 
         await consultaCreditoServiceDbContext.SaveChangesAsync(ct);
     }
-
-    public async Task<List<Credito>> GetCreditosByNfse(string nfse, CancellationToken ct = default)
-    {
-        return await consultaCreditoServiceDbContext
-            .Set<Credito>()
-            .Where(s => s.NumeroNfse.Equals(nfse, StringComparison.Ordinal))
-            .AsNoTracking()
-            .ToListAsync(ct);
-    }
-
-    public async Task<List<Credito>> GetCreditosByNumeroCredito(string numeroCredito, CancellationToken ct = default)
-    {
-        return await consultaCreditoServiceDbContext
-            .Set<Credito>()
-            .Where(s => s.NumeroCredito.Equals(numeroCredito, StringComparison.Ordinal))
-            .AsNoTracking()
-            .ToListAsync(ct);
-    }
 }
