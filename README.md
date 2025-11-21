@@ -38,6 +38,14 @@ docker compose up
 
 # a api por padrão estará rodando no endereço: http://localhost:5025
 ```
+- Endereço padrão api
+[api](http://localhost:5025)
+
+- Self Health check
+[self](http://localhost:5025/self)
+
+- Ready health check
+[ready](http://localhost:5025/ready)
 
 ### ▶️ Testando a API com o arquivo .http
 
