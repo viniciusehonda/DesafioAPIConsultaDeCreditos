@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\ConsultaCreditoService.Application\ConsultaCreditoService.Application.csproj" />
     <ProjectReference Include="..\..\src\ConsultaCreditoService.Domain\ConsultaCreditoService.Domain.csproj" />
+    <ProjectReference Include="..\..\src\ConsultaCreditoService.Infrastructure\ConsultaCreditoService.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

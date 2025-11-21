@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ConsultaCreditoService.Application.Credito.ConsultarCreditoPorNumeroCredito;
 using ConsultaCreditoService.Domain.Entities;
+using ConsultaCreditoService.Infrastructure.Database;
 
 namespace ConsultaCreditoService.UnitTests.Application;
 public class ConsultarCreditoPorNumeroCreditoQueryHandlerTests
@@ -13,7 +14,7 @@ public class ConsultarCreditoPorNumeroCreditoQueryHandlerTests
     public async Task Handle_ShouldReturnCredito_WhenNumeroCreditoExists()
     {
         // Arrange
-        Infrastructure.Database.ConsultaCreditoServiceDbContext db = Mocks.Mocks.CreateDbContext();
+        ConsultaCreditoServiceDbContext db = Mocks.Mocks.CreateDbContext();
         var credito = new Credito(1, "CRED-123", "NF-001", new DateTime(2024, 10, 18, 0, 0, 0, DateTimeKind.Utc),
                 120.75m, "Normal", true, 5m, 1000m, 10m, 990m);
 
@@ -44,7 +45,7 @@ public class ConsultarCreditoPorNumeroCreditoQueryHandlerTests
     public async Task Handle_ShouldReturnNull_WhenNumeroCreditoDoesNotExist()
     {
         // Arrange
-        Infrastructure.Database.ConsultaCreditoServiceDbContext db = Mocks.Mocks.CreateDbContext();
+        ConsultaCreditoServiceDbContext db = Mocks.Mocks.CreateDbContext();
         var handler = new ConsultarCreditoPorNumeroCreditoQueryHandler(db);
 
         var query = new ConsultarCreditoPorNumeroCreditoQuery("NOT_FOUND");
