@@ -10,7 +10,7 @@ using ConsultaCreditoService.Infrastructure.Messaging;
 using SharedKernel;
 
 namespace ConsultaCreditoService.Application.Credito.IntegrarCreditoConstituido;
-internal sealed class IntegrarCreditoConstituidoCommandHandler(AzureServiceBusPublisher serviceBusPublisher)
+internal sealed class IntegrarCreditoConstituidoCommandHandler(IAzureServiceBusPublisher serviceBusPublisher)
     : ICommandHandler<IntegrarCreditoConstituidoCommand, IntegrarCreditoConstituidoResponse>
 {
     public async Task<Result<IntegrarCreditoConstituidoResponse>> Handle(IntegrarCreditoConstituidoCommand command, CancellationToken cancellationToken)

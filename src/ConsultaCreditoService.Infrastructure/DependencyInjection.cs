@@ -34,7 +34,7 @@ public static class DependencyInjection
 
     private static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddSingleton<AzureServiceBusPublisher>();
+        services.AddSingleton<IAzureServiceBusPublisher, AzureServiceBusPublisher>();
         return services;
     }
 

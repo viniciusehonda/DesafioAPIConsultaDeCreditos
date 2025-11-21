@@ -9,7 +9,7 @@ using Azure.Messaging.ServiceBus.Administration;
 using Microsoft.Extensions.Configuration;
 
 namespace ConsultaCreditoService.Infrastructure.Messaging;
-public class AzureServiceBusPublisher : IDisposable
+public class AzureServiceBusPublisher : IAzureServiceBusPublisher, IDisposable
 {
     private readonly ServiceBusClient _serviceBusClient;
     public AzureServiceBusPublisher(IConfiguration config)
