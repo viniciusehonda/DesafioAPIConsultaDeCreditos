@@ -52,7 +52,7 @@
             },
             "Subscriptions": [
               {
-                "Name": "ConsultaCreditoSubscription",
+                "Name": "ConsultaCreditoAuditSubscription",
                 "Properties": {
                   "DeadLetteringOnMessageExpiration": false,
                   "DefaultMessageTimeToLive": "PT1H",

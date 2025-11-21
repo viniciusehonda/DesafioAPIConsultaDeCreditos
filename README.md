@@ -34,6 +34,7 @@ cd ConsultaCreditoService
 
 # posicionar cmd na pasta raiz do projeto
 # executar docker compose up
+# **Nota o serviço servicebus pode demorar um pouco para iniciar
 docker compose up
 
 # a api por padrão estará rodando no endereço: http://localhost:5025
